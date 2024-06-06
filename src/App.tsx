@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./pages/HomePage";
+import { RoutePage, SUB_ROUTE_PAGES } from "./utils/routeData";
 
 function App() {
   return (
@@ -12,10 +13,13 @@ function App() {
               <Routes>
                 <Route path="/" element={<Layout />}>
                   <Route index element={<Home />} />
-                  <Route path="/posts" element={<>Posts</>} />
-                  <Route path="/comments" element={<>Comments</>} />
-                  <Route path="/users" element={<>Users</>} />
-                  <Route path="*" element={<h1>No page found</h1>} />
+                  {SUB_ROUTE_PAGES.map((routePage: RoutePage) => (
+                    <Route
+                      key={routePage.path}
+                      path={routePage.path}
+                      element={routePage.element}
+                    />
+                  ))}
                 </Route>
               </Routes>
             </main>
